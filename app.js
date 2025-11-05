@@ -117,6 +117,8 @@ function displayQuestion(question) {
             radio.name = 'answer';
             radio.id = `option-${optionKey}`;
             radio.value = optionKey;
+            
+            // Radio button değiştiğinde kontrol et
             radio.addEventListener('change', function() {
                 if (!isChecking) {
                     selectedAnswer = optionKey;
@@ -125,6 +127,19 @@ function displayQuestion(question) {
                     setTimeout(() => {
                         checkAnswer();
                     }, 300); // Kısa bir gecikme ile daha akıcı görünsün
+                }
+            });
+            
+            // Div'e tıklandığında da radio button'u seç ve kontrol et
+            optionDiv.addEventListener('click', function(e) {
+                if (e.target !== radio && !isChecking) {
+                    radio.checked = true;
+                    selectedAnswer = optionKey;
+                    updateOptionStyles();
+                    // Otomatik olarak cevabı kontrol et
+                    setTimeout(() => {
+                        checkAnswer();
+                    }, 300);
                 }
             });
             

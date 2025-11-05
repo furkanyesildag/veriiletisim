@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veri İletişimi Teknikleri - Soru Bankası</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📡 Veri İletişimi Teknikleri - Soru Bankası</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Toplam Soru:</span>
+                    <span class="stat-value" id="totalQuestions">110</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Doğru:</span>
+                    <span class="stat-value correct" id="correctCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Yanlış:</span>
+                    <span class="stat-value wrong" id="wrongCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Başarı Oranı:</span>
+                    <span class="stat-value" id="successRate">0%</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <button id="resetBtn" class="btn btn-secondary">🔄 İstatistikleri Sıfırla</button>
+        </div>
+
+        <div class="question-container">
+            <div class="question-header">
+                <span class="question-number" id="questionNumber">-</span>
+                <span class="question-total">/ 110</span>
+            </div>
+            
+            <div class="question-text" id="questionText">
+                Sorular yükleniyor...
+            </div>
+
+            <div class="options-container" id="optionsContainer">
+                <!-- Seçenekler buraya eklenecek -->
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+            <div class="correct-answer" id="correctAnswer"></div>
+        </div>
+
+        <div class="recent-questions">
+            <h3>Son Çözülen Sorular</h3>
+            <div id="recentQuestionsList"></div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+

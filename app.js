@@ -13,6 +13,23 @@ let recentQuestions = [];
 
 // Sayfa yüklendiğinde
 document.addEventListener('DOMContentLoaded', function() {
+    // Soruların yüklenmesini bekle
+    if (typeof questions === 'undefined' || !questions || questions.length === 0) {
+        // Sorular henüz yüklenmemişse biraz bekle
+        setTimeout(function() {
+            if (typeof questions === 'undefined' || !questions || questions.length === 0) {
+                document.getElementById('questionText').textContent = 'Hata: Sorular yüklenemedi. Lütfen sayfayı yenileyin.';
+                console.error('questions.js dosyası yüklenemedi');
+                return;
+            }
+            initializeApp();
+        }, 100);
+    } else {
+        initializeApp();
+    }
+});
+
+function initializeApp() {
     loadStats();
     updateStatsDisplay();
     
@@ -20,10 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Soruları sıraya koy ve rastgele birinden başla
     initializeQuestions();
-});
+}
 
 // Soruları başlat - rastgele sırayla ama 1. sorudan başla
 function initializeQuestions() {
+    // questions dizisinin yüklendiğini kontrol et
+    if (typeof questions === 'undefined' || !questions || questions.length === 0) {
+        console.error('Sorular yüklenemedi! questions.js dosyasını kontrol edin.');
+        document.getElementById('questionText').textContent = 'Hata: Sorular yüklenemedi. Lütfen sayfayı yenileyin.';
+        return;
+    }
+    
     // Tüm soruları sıraya koy
     questionOrder = questions.map((q, index) => index);
     

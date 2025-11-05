@@ -118,27 +118,34 @@ function displayQuestion(question) {
             radio.id = `option-${optionKey}`;
             radio.value = optionKey;
             
-            // Radio button değiştiğinde kontrol et
-            radio.addEventListener('change', function() {
-                if (!isChecking) {
-                    selectedAnswer = optionKey;
-                    updateOptionStyles();
-                    // Otomatik olarak cevabı kontrol et
-                    setTimeout(() => {
-                        checkAnswer();
-                    }, 300); // Kısa bir gecikme ile daha akıcı görünsün
-                }
-            });
+            // Sadece div'e tıklandığında kontrol et (radio ve label'a tıklanınca da çalışır)
+            optionDiv.style.cursor = 'pointer';
+            let clickHandled = false;
             
-            // Div'e tıklandığında da radio button'u seç ve kontrol et
             optionDiv.addEventListener('click', function(e) {
-                if (e.target !== radio && !isChecking) {
+                if (!isChecking && !clickHandled) {
+                    clickHandled = true;
+                    // Radio button'u seç
                     radio.checked = true;
                     selectedAnswer = optionKey;
                     updateOptionStyles();
                     // Otomatik olarak cevabı kontrol et
                     setTimeout(() => {
                         checkAnswer();
+                        clickHandled = false;
+                    }, 300);
+                }
+            });
+            
+            // Radio button değiştiğinde de kontrol et (programatik seçimler için)
+            radio.addEventListener('change', function() {
+                if (!isChecking && radio.checked && !clickHandled) {
+                    clickHandled = true;
+                    selectedAnswer = optionKey;
+                    updateOptionStyles();
+                    setTimeout(() => {
+                        checkAnswer();
+                        clickHandled = false;
                     }, 300);
                 }
             });
